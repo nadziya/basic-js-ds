@@ -40,9 +40,24 @@ class BinarySearchTree {
     return this.rootNode;
   }
 
-  has(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  has(data) {
+    return intoTree(this.rootNode, data);
+
+    function intoTree(nodule, data) {
+      let result = 0;
+      if (!nodule) {
+        return false;
+      }
+      if (nodule.data === data) {
+        return true;
+      }
+      if (data < nodule.data) {
+        result = intoTree(nodule.left, data);
+      } else {
+        result = intoTree(nodule.right, data);
+      }
+      return result;
+    }
   }
 
   find(/*data*/) {
@@ -50,9 +65,39 @@ class BinarySearchTree {
     // remove line with error and write your code here
   }
 
-  remove(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  remove(data) {
+    this.rootNode = deleteNode(this.rootNode, data);
+
+    function deleteNode(nodule, data) {
+      if (!nodule) {
+        return null;
+      }
+      if (data < nodule.data) {
+        nodule.left = deleteNode(nodule.left, data);
+        return nodule;
+      } else if (data > nodule.data) {
+        nodule.right = deleteNode(nodule.right, data);
+        return nodule;
+      } else {
+        if (!nodule.right && !nodule.left) {
+         return null;
+        } else if (!nodule.left) {
+          nodule = nodule.right;
+          return nodule;
+        } else if (!nodule.right) {
+          nodule = nodule.left;
+          return nodule;
+        }
+        let minimumRight = nodule.right;
+        while (minimumRight.left) {
+          minimumRight = minimumRight.left;
+        }
+        nodule.data = minimumRight.data;
+        nodule.right = deleteNode(nodule.right, minimumRight.data);
+        return nodule;
+      }
+
+    }
   }
 
   min() {
