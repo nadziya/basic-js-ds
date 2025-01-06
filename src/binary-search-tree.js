@@ -12,26 +12,26 @@ class BinarySearchTree {
   }
 
   add(data) {
-    const newNode = new Node(data);
+    const nodule = new Node(data);
     if (!this.rootNode) {
-      this.rootNode = newNode;
+      this.rootNode = nodule;
     } else {
-      this.specialNode(this.rootNode, newNode);
+      this.specialNode(this.rootNode, nodule);
     }
   }
   
-  specialNode(nod, newNode) {
-    if (newNode.data < nod.data) {
+  specialNode(nod, nodule) {
+    if (nodule.data < nod.data) {
       if (nod.left === null) {
-        nod.left = newNode;
+        nod.left = nodule;
       } else {
-        this.specialNode(nod.left, newNode);
+        this.specialNode(nod.left, nodule);
       }
     } else {
       if (nod.right === null) {
-        nod.right = newNode;
+        nod.right = nodule;
       } else {
-        this.specialNode(nod.right, newNode);
+        this.specialNode(nod.right, nodule);
       }
     }
   }
